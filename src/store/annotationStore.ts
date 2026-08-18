@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { Annotation, AnnotationType, AnnotationState } from '@types/annotations';
+import type { Annotation, AnnotationType, AnnotationState } from '@/types/annotations';
 import { v4 as uuidv4 } from 'uuid';
 
 interface AnnotationStoreState extends AnnotationState {

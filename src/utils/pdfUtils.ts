@@ -4,10 +4,10 @@ import * as pdfjsLib from 'pdfjs-dist';
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 export class PDFUtil {
-  private pdf: pdfjsLib.PDFDocument | null = null;
+  private pdf: any | null = null;
   private currentScale = 1;
 
-  async loadPDF(url: string | ArrayBuffer): Promise<pdfjsLib.PDFDocument> {
+  async loadPDF(url: string | ArrayBuffer): Promise<any> {
     this.pdf = await pdfjsLib.getDocument(url).promise;
     return this.pdf;
   }
@@ -47,7 +47,7 @@ export class PDFUtil {
     const textContent = await page.getTextContent();
 
     return textContent.items
-      .map((item: any) => item.str)
+      .map((item: any) => ('str' in item ? item.str : ''))
       .join(' ');
   }
 
@@ -65,7 +65,7 @@ export class PDFUtil {
       const textContent = await page.getTextContent();
 
       let pageText = textContent.items
-        .map((item: any) => item.str)
+        .map((item: any) => ('str' in item ? item.str : ''))
         .join(' ');
 
       if (!options.matchCase) pageText = pageText.toLowerCase();
@@ -91,7 +91,7 @@ export class PDFUtil {
     const textContent = await page.getTextContent();
 
     return textContent.items
-      .map((item: any) => item.str)
+      .map((item: any) => ('str' in item ? item.str : ''))
       .join('');
   }
 

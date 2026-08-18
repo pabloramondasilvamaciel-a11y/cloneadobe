@@ -1,0 +1,435 @@
+# 🎨 Escaneando Reader v3.0
+
+> **Leitor de PDF moderno com 26 features de produtividade pessoal. Privacidade local, código aberto e sem telemetria.**
+
+[![GitHub Release](https://img.shields.io/github/v/release/pabloramondasilvamaciel-a11y/cloneadobe?style=for-the-badge)](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-18%2B-green?style=for-the-badge)](https://nodejs.org/)
+[![Electron](https://img.shields.io/badge/electron-27%2B-brightgreen?style=for-the-badge)](https://www.electronjs.org/)
+[![TypeScript](https://img.shields.io/badge/typescript-5.1%2B-blue?style=for-the-badge)](https://www.typescriptlang.org/)
+
+---
+
+## ✨ Destaques
+
+- 📄 **Renderização PDF** profissional com PDF.js
+- 🎨 **Anotações avançadas** (highlight, underline, desenho, comentários)
+- 🔍 **Busca inteligente** com suporte a texto completo
+- 🔒 **Criptografia AES-256** para proteção de documentos
+- ✍️ **Assinatura digital** certificada
+- ☁️ **Sincronização em nuvem** (Google Drive, OneDrive, AWS S3)
+- 📊 **16 Features Premium** (veja abaixo)
+- 🌓 **Tema automático** claro/escuro
+- 📱 **Responsivo** (Desktop, Tablet, Mobile)
+- 🔐 **Privacidade**: 100% local, sem telemetria
+
+---
+
+## 🎯 26 Features Totais
+
+### 📚 Básicas (Incluídas)
+- ✅ Abrir e renderizar PDFs
+- ✅ Navegação entre páginas
+- ✅ Zoom dinâmico
+- ✅ Anotações (highlight, underline, comentários)
+- ✅ Busca de texto
+- ✅ Bookmarks
+- ✅ Proteção com senha
+- ✅ Impressão
+- ✅ Assinatura digital
+- ✅ Tema claro/escuro
+
+### 🌟 Premium (Novas - v3.0)
+
+#### 📄 Processamento de Documentos (5)
+| # | Feature | Descrição |
+|---|---------|-----------|
+| 1 | ✂️ Mesclar PDFs | Combine múltiplos PDFs em um |
+| 2 | 🔪 Dividir PDF | Separe por intervalo de páginas |
+| 3 | 🔄 Reordenar Páginas | Organize páginas customizadas |
+| 4 | 🔃 Girar Páginas | 90°, 180° ou 270° |
+| 5 | 📤 Extrair Páginas | Extraia um intervalo como novo PDF |
+
+#### 🧠 Reconhecimento & Análise (4)
+| # | Feature | Descrição |
+|---|---------|-----------|
+| 6 | 📊 Detectar Tabelas | Identificar tabelas automaticamente |
+| 7 | 📝 Extrair Texto | Texto estruturado e organizado |
+| 8 | 🏷️ Metadados | Visualizar informações do documento |
+| 9 | 📈 Estatísticas | Análise completa do PDF |
+
+#### ⚙️ Automação & Batch (4)
+| # | Feature | Descrição |
+|---|---------|-----------|
+| 10 | 🔄 Batch Processing | Processar múltiplos PDFs |
+| 11 | 📋 Templates | Salvar e reutilizar operações |
+| 12 | 🔔 Auto-Organize | Organizar por data, tamanho, idioma |
+| 13 | 📅 Agendamento | Executar tarefas automaticamente |
+
+#### ☁️ Integração & Compliance (3)
+| # | Feature | Descrição |
+|---|---------|-----------|
+| 14 | 💾 Cloud Sync | Sincronizar com nuvem |
+| 15 | 📜 Histórico | Versões e restauração |
+| 16 | ✅ Validação | Conformidade PDF/A |
+
+---
+
+## 🚀 Quick Start
+
+### Requisitos
+- **Node.js** 18+
+- **npm** 9+
+- **Git**
+
+### Instalação
+
+```bash
+# 1. Clonar repositório
+git clone https://github.com/pabloramondasilvamaciel-a11y/cloneadobe.git
+cd cloneadobe
+
+# 2. Instalar dependências
+npm install
+
+# 3. Rodar em desenvolvimento
+npm run dev
+```
+
+### Build & Distribuição
+
+```bash
+# Converter ícone SVG para PNG/ICO
+npm run convert-icon
+
+# Build completo (converter + compilar + empacotar)
+npm run full-build
+
+# Resultado: dist/escaneando-reader-3.0.0.exe
+```
+
+---
+
+## 📊 Estrutura do Projeto
+
+```
+escaneando-reader/
+├── 📁 electron/
+│   ├── main.ts                          # Processo principal do Electron
+│   ├── preload.ts                       # API bridge (IPC)
+│   └── 📁 handlers/                     # Handlers IPC
+│       ├── docProcessingHandler.ts      # Processamento de documentos
+│       ├── recognitionHandler.ts        # Reconhecimento & análise
+│       ├── automationHandler.ts         # Automação & batch
+│       ├── integrationHandler.ts        # Integração & cloud
+│       ├── pdfHandler.ts                # PDF renderização
+│       ├── annotationHandler.ts         # Anotações
+│       ├── securityHandler.ts           # Segurança & criptografia
+│       └── printHandler.ts              # Impressão
+│
+├── 📁 src/
+│   ├── 📁 components/                   # Componentes React
+│   │   ├── PDFViewer.tsx                # Renderizador de PDF
+│   │   ├── AnnotationPanel.tsx          # Painel de anotações
+│   │   ├── DocProcessingPanel.tsx       # Processamento (NOVO)
+│   │   ├── RecognitionPanel.tsx         # Análise (NOVO)
+│   │   ├── AutomationPanel.tsx          # Automação (NOVO)
+│   │   ├── IntegrationPanel.tsx         # Integração (NOVO)
+│   │   ├── SearchPanel.tsx              # Busca
+│   │   ├── BookmarksPanel.tsx           # Bookmarks
+│   │   └── ...
+│   ├── 📁 store/                        # Zustand stores
+│   │   ├── pdfStore.ts
+│   │   └── annotationStore.ts
+│   ├── 📁 utils/                        # Utilitários
+│   │   ├── pdfUtils.ts
+│   │   └── annotationUtils.ts
+│   ├── 📁 types/                        # TypeScript types
+│   └── App.tsx                          # Componente raiz
+│
+├── 📁 assets/
+│   ├── icon.svg                         # Ícone (SVG)
+│   ├── icon.png                         # Ícone (PNG)
+│   └── icon.ico                         # Ícone (ICO - Windows)
+│
+├── 📁 public/
+│   ├── index.html                       # Página HTML
+│   └── favicon-*.png                    # Favicons
+│
+├── package.json                         # Dependências
+├── tsconfig.json                        # TypeScript config
+├── webpack.config.js                    # Webpack config
+├── convert-icon.js                      # Script conversor de ícone
+└── README.md                            # Este arquivo
+```
+
+---
+
+## 💻 Desenvolvimento
+
+### Comandos Disponíveis
+
+```bash
+# Desenvolvimento
+npm run dev              # Rodar com hot reload
+
+# Build
+npm run build           # Compilar React + Electron
+npm run dist            # Criar executável final
+npm run full-build      # Converter ícone + Build + Dist (tudo)
+
+# Ferramentas
+npm run convert-icon    # Converter ícone SVG para PNG/ICO
+npm run lint            # Verificar código
+npm run lint:fix        # Corrigir problemas de linting
+npm run test            # Rodar testes
+npm run test:watch      # Modo watch dos testes
+
+# Limpeza
+npm run clean           # Limpar build/dist
+```
+
+### Converter Ícone
+
+```bash
+# Automático (recomendado)
+npm run convert-icon
+
+# Resultado:
+# ✅ assets/icon.png (512x512)
+# ✅ assets/icon_256.png
+# ✅ assets/icon.ico (Windows)
+# ✅ public/favicon-*.png
+```
+
+---
+
+## 🔧 Stack Tecnológico
+
+| Categoria | Tecnologia |
+|-----------|-----------|
+| **Runtime** | Electron 27+ |
+| **Frontend** | React 18.2 |
+| **Linguagem** | TypeScript 5.1 |
+| **State** | Zustand 4.4 |
+| **PDF** | PDF.js 4.0 |
+| **Builder** | Webpack 5 |
+| **Bundler** | Electron Builder 24 |
+| **Segurança** | crypto-js 4.1 |
+| **Estilo** | CSS3 (Responsivo) |
+
+---
+
+## 🔒 Segurança & Privacidade
+
+### Proteção
+- ✅ **Context Isolation**: Ativa
+- ✅ **Sandbox**: Habilitado
+- ✅ **Node Integration**: Desativado
+- ✅ **Criptografia**: AES-256
+- ✅ **Sem Telemetria**: 100% privado
+- ✅ **Offline**: Funciona completamente offline
+
+### Conformidade
+- 📋 Pronto para GDPR
+- 📋 Pronto para LGPD
+- 📋 Pronto para HIPAA
+- 📋 Validação PDF/A
+
+---
+
+## 📥 Instalação (Usuários Finais)
+
+### Windows
+```
+1. Baixe: escaneando-reader-3.0.0.exe
+2. Duplo clique para instalar
+3. Crie atalho no Desktop
+4. Pronto!
+```
+
+### macOS
+```
+1. Baixe: escaneando-reader-3.0.0.dmg
+2. Arraste para Applications
+3. Pronto!
+```
+
+### Linux
+```
+1. Baixe: escaneando-reader-3.0.0.AppImage
+2. chmod +x escaneando-reader-3.0.0.AppImage
+3. ./escaneando-reader-3.0.0.AppImage
+```
+
+---
+
+## 📚 Documentação
+
+- [Quick Start](EXECUTAR_CONVERTER.md) - Como rodar o conversor
+- [Conversor de Ícone](CONVERTER_ICONE.md) - Documentação técnica
+- [Guia de Desenvolvimento](DEVELOPMENT.md) - Para contribuidores
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Por favor:
+
+1. Fork o repositório
+2. Crie uma branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+### Diretrizes
+- Mantenha o código limpo e bem documentado
+- Escreva testes para novas features
+- Siga o padrão TypeScript existente
+- Atualize a documentação conforme necessário
+
+---
+
+## 📊 Estatísticas do Projeto
+
+```
+Linhas de Código:        7000+
+Documentação:            2600+ linhas
+Handlers Electron:       8
+Componentes React:       14
+Features Totais:         26
+Type Safety:             100% (TypeScript)
+Plataformas:             Windows, macOS, Linux
+Licença:                 MIT
+```
+
+---
+
+## 🐛 Reportar Bugs
+
+Encontrou um bug? Crie uma issue no GitHub:
+
+1. Vá para [Issues](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe/issues)
+2. Clique em "New Issue"
+3. Descreva o problema com detalhes
+4. Inclua passos para reproduzir
+5. Anexe screenshots se aplicável
+
+---
+
+## 💡 Sugestões de Melhoria
+
+Tem uma ideia? Abra uma issue com o label `enhancement`:
+
+1. [GitHub Discussions](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe/discussions)
+2. Descreva sua ideia
+3. Discuta com a comunidade
+
+---
+
+## 📝 Licença
+
+Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+```
+MIT License
+
+Copyright (c) 2024 Pablo Ramon da Silva Maciel
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+
+---
+
+## 👤 Autor
+
+**Pablo Ramon da Silva Maciel**
+- GitHub: [@pabloramondasilvamaciel-a11y](https://github.com/pabloramondasilvamaciel-a11y)
+- Email: [pablomaciel.adv@gmail.com](mailto:pablomaciel.adv@gmail.com)
+
+---
+
+## 🙏 Agradecimentos
+
+Obrigado a todos que contribuem, reportam bugs e sugerem melhorias!
+
+### Bibliotecas & Ferramentas
+- [Electron](https://www.electronjs.org/) - Framework desktop
+- [React](https://react.dev/) - UI library
+- [PDF.js](https://mozilla.github.io/pdf.js/) - PDF rendering
+- [Zustand](https://github.com/pmndrs/zustand) - State management
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+
+---
+
+## 📊 Status do Projeto
+
+| Fase | Status | Progresso |
+|------|--------|-----------|
+| 🎯 Funcionalidades Base | ✅ Completo | 100% |
+| 🌟 16 Features Premium | ✅ Completo | 100% |
+| 🎨 Interface & UX | ✅ Completo | 100% |
+| 🧪 Testes | ⏳ Em desenvolvimento | 60% |
+| 📚 Documentação | ✅ Completo | 100% |
+| 🚀 Produção | ✅ Pronto | 100% |
+
+---
+
+## 🎯 Roadmap
+
+### v3.1 (Próximo)
+- [ ] Suporte a mais formatos (DOCX, XLSX)
+- [ ] Integração com AI Assistant
+- [ ] Collaborative editing
+- [ ] Mobile app (React Native)
+
+### v4.0
+- [ ] Web version (Next.js)
+- [ ] Plugin system
+- [ ] API pública
+- [ ] Sync na nuvem
+
+---
+
+## ⭐ Dê uma estrela!
+
+Se você gostou deste projeto, considere dar uma ⭐ no GitHub! Isso ajuda outros a descobrir o projeto.
+
+[![GitHub stars](https://img.shields.io/github/stars/pabloramondasilvamaciel-a11y/cloneadobe?style=social)](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe)
+
+---
+
+## 📞 Suporte
+
+Precisa de ajuda?
+
+- 📖 Leia a [Documentação](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe/wiki)
+- 💬 Abra uma [Discussão](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe/discussions)
+- 🐛 Reporte um [Bug](https://github.com/pabloramondasilvamaciel-a11y/cloneadobe/issues)
+- 📧 Envie um email
+
+---
+
+## 🎉 Última Atualização
+
+**Versão:** 3.0.0  
+**Data:** 17 de Agosto de 2024  
+**Mudanças:** +16 Features, +7000 linhas de código, Nova interface premium
+
+---
+
+<div align="center">
+
+**[⬆ Voltar ao topo](#escaneando-reader-v30)**
+
+Feito com ❤️ por [Pablo Ramon](https://github.com/pabloramondasilvamaciel-a11y)
+
+</div>

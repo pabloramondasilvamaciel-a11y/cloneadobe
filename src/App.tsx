@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { usePDFStore } from '@store/pdfStore';
-import { useAnnotationStore } from '@store/annotationStore';
 import PDFViewer from '@components/PDFViewer';
 import Toolbar from '@components/Toolbar';
-import Sidebar from '@components/Sidebar';
 import AnnotationPanel from '@components/AnnotationPanel';
 import SearchPanel from '@components/SearchPanel';
 import BookmarksPanel from '@components/BookmarksPanel';
 import PasswordDialog from '@components/PasswordDialog';
 import './App.css';
 
-interface Window {
-  electronApi?: any;
-}
-
 const App: React.FC = () => {
-  const { document: pdfDocument, viewState } = usePDFStore();
+  const { viewState } = usePDFStore();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activePanel, setActivePanel] = useState<'annotations' | 'search' | 'bookmarks' | null>(null);
   const [passwordRequired, setPasswordRequired] = useState(false);
@@ -37,7 +31,7 @@ const App: React.FC = () => {
         // Handle zoom out
       });
 
-      window.electronApi.pdf.onThemeChange((theme: string) => {
+      window.electronApi.pdf.onThemeChange(() => {
         // Handle theme change
       });
 
@@ -60,9 +54,9 @@ const App: React.FC = () => {
 
     const handleDrop = (e: DragEvent) => {
       e.preventDefault();
-      const files = e.dataTransfer?.files;
+      const files = e.dataTransfer?.files as any;
       if (files && files[0].name.endsWith('.pdf')) {
-        setFilePath(files[0].path);
+        setFilePath(files[0].name);
       }
     };
 
@@ -108,7 +102,7 @@ const App: React.FC = () => {
 
       {passwordRequired && (
         <PasswordDialog
-          onSubmit={(password) => {
+          onSubmit={() => {
             setPasswordRequired(false);
             // Handle password verification
           }}
@@ -142,7 +136,7 @@ const DefaultSidebar: React.FC = () => (
         </div>
       </div>
     </div>
-    <div style={{ borderTop: '1px solid var(--color-border)', padding: '16px' }} className="app.dark" style={{ borderTopColor: 'var(--color-border-dark)' }}>
+    <div style={{ borderTop: '1px solid var(--color-border)', borderTopColor: 'var(--color-border-dark)', padding: '16px' }} className="app-dark">
       <div className="sidebar-header" style={{ padding: '0 0 12px 0', textTransform: 'uppercase' }}>Ecossistema</div>
       <div className="sidebar-nav">
         <div className="sidebar-nav-item">

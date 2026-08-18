@@ -8,13 +8,13 @@ interface RecognitionPanelProps {
 export const RecognitionPanel: React.FC<RecognitionPanelProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState<'tables' | 'text' | 'metadata' | 'stats'>('tables');
   const [processing, setProcessing] = useState(false);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<RecognitionResults | null>(null);
 
   const handleDetectTables = async () => {
     setProcessing(true);
     try {
-      const result = await (window as any).electronApi.recognition?.detectTables('current.pdf');
-      setResults(result);
+      const result = await window.electronApi?.recognition?.detectTables('current.pdf');
+      setResults(result ?? null);
     } catch (error) {
       console.error('Erro ao detectar tabelas:', error);
     } finally {
@@ -25,8 +25,8 @@ export const RecognitionPanel: React.FC<RecognitionPanelProps> = ({ onClose }) =
   const handleExtractText = async () => {
     setProcessing(true);
     try {
-      const result = await (window as any).electronApi.recognition?.extractText('current.pdf');
-      setResults(result);
+      const result = await window.electronApi?.recognition?.extractText('current.pdf');
+      setResults(result ?? null);
     } catch (error) {
       console.error('Erro ao extrair texto:', error);
     } finally {
@@ -37,8 +37,8 @@ export const RecognitionPanel: React.FC<RecognitionPanelProps> = ({ onClose }) =
   const handleGetMetadata = async () => {
     setProcessing(true);
     try {
-      const result = await (window as any).electronApi.recognition?.getMetadata('current.pdf');
-      setResults(result);
+      const result = await window.electronApi?.recognition?.getMetadata('current.pdf');
+      setResults(result ?? null);
     } catch (error) {
       console.error('Erro ao obter metadados:', error);
     } finally {
@@ -49,8 +49,8 @@ export const RecognitionPanel: React.FC<RecognitionPanelProps> = ({ onClose }) =
   const handleGetStats = async () => {
     setProcessing(true);
     try {
-      const result = await (window as any).electronApi.recognition?.getStats('current.pdf');
-      setResults(result);
+      const result = await window.electronApi?.recognition?.getStats('current.pdf');
+      setResults(result ?? null);
     } catch (error) {
       console.error('Erro ao obter estatísticas:', error);
     } finally {
@@ -103,7 +103,7 @@ export const RecognitionPanel: React.FC<RecognitionPanelProps> = ({ onClose }) =
             {results?.tables && (
               <div className="results-container">
                 <h4>Tabelas Encontradas: {results.totalTablesFound}</h4>
-                {results.tables.map((table: any, idx: number) => (
+                {results.tables.map((table, idx) => (
                   <div key={idx} className="result-item">
                     <span>📍 Página {table.pageNumber}, Tabela {table.tableIndex}</span>
                     <span>{table.rows} × {table.columns} (confiança: {(table.confidence * 100).toFixed(1)}%)</span>
@@ -145,7 +145,7 @@ export const RecognitionPanel: React.FC<RecognitionPanelProps> = ({ onClose }) =
             </button>
             {results?.metadata && (
               <div className="metadata-container">
-                {Object.entries(results.metadata).map(([key, value]: [string, any]) => (
+                {Object.entries(results.metadata).map(([key, value]) => (
                   <div key={key} className="metadata-item">
                     <strong>{key}:</strong>
                     <span>{String(value)}</span>

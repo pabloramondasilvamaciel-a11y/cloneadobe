@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Annotation, HighlightAnnotation, TextBoxAnnotation, DrawingAnnotation, CommentAnnotation } from '@types/annotations';
+import React, { useRef, useState } from 'react';
+import type { Annotation, HighlightAnnotation, TextBoxAnnotation, DrawingAnnotation, CommentAnnotation } from '@/types/annotations';
 import { useAnnotationStore } from '@store/annotationStore';
 import { AnnotationUtil } from '@utils/annotationUtils';
 import './AnnotationLayer.css';

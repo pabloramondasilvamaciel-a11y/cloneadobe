@@ -8,8 +8,8 @@ interface AutomationPanelProps {
 export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState<'batch' | 'templates' | 'organize' | 'scheduled'>('batch');
   const [processing, setProcessing] = useState(false);
-  const [templates, setTemplates] = useState<any[]>([]);
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [templates, setTemplates] = useState<AutomationTemplate[]>([]);
+  const [tasks, setTasks] = useState<ScheduledTask[]>([]);
 
   useEffect(() => {
     loadTemplates();
@@ -18,7 +18,7 @@ export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => 
 
   const loadTemplates = async () => {
     try {
-      const result = await (window as any).electronApi.automation?.getTemplates();
+      const result = await window.electronApi?.automation?.getTemplates();
       setTemplates(result?.templates || []);
     } catch (error) {
       console.error('Erro ao carregar templates:', error);
@@ -27,7 +27,7 @@ export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => 
 
   const loadScheduledTasks = async () => {
     try {
-      const result = await (window as any).electronApi.automation?.getScheduledTasks();
+      const result = await window.electronApi?.automation?.getScheduledTasks();
       setTasks(result?.tasks || []);
     } catch (error) {
       console.error('Erro ao carregar tarefas agendadas:', error);
@@ -37,7 +37,7 @@ export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => 
   const handleBatchProcess = async () => {
     setProcessing(true);
     try {
-      const result = await (window as any).electronApi.automation?.batchProcess('task-1', './input', 'merge');
+      const result = await window.electronApi?.automation?.batchProcess('task-1', './input', 'merge');
       console.log('Resultado do batch:', result);
     } catch (error) {
       console.error('Erro no batch processing:', error);
@@ -55,7 +55,7 @@ export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => 
         operations: ['merge', 'compress'],
         settings: {},
       };
-      await (window as any).electronApi.automation?.saveTemplate(template);
+      await window.electronApi?.automation?.saveTemplate(template);
       loadTemplates();
     } catch (error) {
       console.error('Erro ao salvar template:', error);
@@ -65,7 +65,7 @@ export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => 
   const handleAutoOrganize = async () => {
     setProcessing(true);
     try {
-      await (window as any).electronApi.automation?.autoOrganize('./documents', 'byDate');
+      await window.electronApi?.automation?.autoOrganize('./documents', 'byDate');
     } catch (error) {
       console.error('Erro ao organizar:', error);
     } finally {
@@ -82,7 +82,7 @@ export const AutomationPanel: React.FC<AutomationPanelProps> = ({ onClose }) => 
         schedule: '0 0 * * *', // Meia-noite diariamente
         enabled: true,
       };
-      await (window as any).electronApi.automation?.scheduleTask(task);
+      await window.electronApi?.automation?.scheduleTask(task);
       loadScheduledTasks();
     } catch (error) {
       console.error('Erro ao agendar tarefa:', error);

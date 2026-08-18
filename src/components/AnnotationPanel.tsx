@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAnnotationStore } from '@store/annotationStore';
 import { usePDFStore } from '@store/pdfStore';
-import { AnnotationUtil } from '@utils/annotationUtils';
+import type { AnnotationType } from '@/types/annotations';
 import './AnnotationPanel.css';
 
 const AnnotationPanel: React.FC = () => {
@@ -17,7 +17,7 @@ const AnnotationPanel: React.FC = () => {
 
   const { viewState } = usePDFStore();
 
-  const handleToolClick = (tool: any) => {
+  const handleToolClick = (tool: AnnotationType) => {
     setCurrentTool(currentTool === tool ? null : tool);
   };
 

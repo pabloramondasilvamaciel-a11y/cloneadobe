@@ -4,7 +4,7 @@ import './SearchPanel.css';
 
 const SearchPanel: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Array<{ page: number; text: string; matches: number }>>([]);
   const [loading, setLoading] = useState(false);
   const [matchCase, setMatchCase] = useState(false);
   const [selectedResult, setSelectedResult] = useState<number | null>(null);
@@ -27,7 +27,7 @@ const SearchPanel: React.FC = () => {
     }
   };
 
-  const handleResultClick = (result: any) => {
+  const handleResultClick = () => {
     // Navigate to page and highlight
     // This would dispatch to the PDF store
   };
@@ -74,7 +74,7 @@ const SearchPanel: React.FC = () => {
                 className={`result-item ${selectedResult === index ? 'selected' : ''}`}
                 onClick={() => {
                   setSelectedResult(index);
-                  handleResultClick(result);
+                  handleResultClick();
                 }}
               >
                 <div className="result-page">Página {result.page}</div>

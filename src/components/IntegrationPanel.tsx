@@ -8,8 +8,8 @@ interface IntegrationPanelProps {
 export const IntegrationPanel: React.FC<IntegrationPanelProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState<'cloud' | 'history' | 'validation'>('cloud');
   const [processing, setProcessing] = useState(false);
-  const [syncStatus, setSyncStatus] = useState<any>(null);
-  const [versions, setVersions] = useState<any[]>([]);
+  const [syncStatus, setSyncStatus] = useState<SyncStatus | null>(null);
+  const [versions, setVersions] = useState<DocumentVersion[]>([]);
 
   useEffect(() => {
     loadSyncStatus();
@@ -18,8 +18,8 @@ export const IntegrationPanel: React.FC<IntegrationPanelProps> = ({ onClose }) =
 
   const loadSyncStatus = async () => {
     try {
-      const result = await (window as any).electronApi.integration?.getSyncStatus();
-      setSyncStatus(result);
+      const result = await window.electronApi?.integration?.getSyncStatus();
+      setSyncStatus(result ?? null);
     } catch (error) {
       console.error('Erro ao carregar status de sincronização:', error);
     }
@@ -27,7 +27,7 @@ export const IntegrationPanel: React.FC<IntegrationPanelProps> = ({ onClose }) =
 
   const loadVersionHistory = async () => {
     try {
-      const result = await (window as any).electronApi.integration?.getVersionHistory('current.pdf');
+      const result = await window.electronApi?.integration?.getVersionHistory('current.pdf');
       setVersions(result?.versions || []);
     } catch (error) {
       console.error('Erro ao carregar histórico de versões:', error);
@@ -41,7 +41,7 @@ export const IntegrationPanel: React.FC<IntegrationPanelProps> = ({ onClose }) =
         provider: 'google-drive' as const,
         accessToken: 'token-aqui',
       };
-      await (window as any).electronApi.integration?.autoSaveCloud('current.pdf', config);
+      await window.electronApi?.integration?.autoSaveCloud('current.pdf', config);
       loadSyncStatus();
     } catch (error) {
       console.error('Erro ao salvar na nuvem:', error);
@@ -53,7 +53,7 @@ export const IntegrationPanel: React.FC<IntegrationPanelProps> = ({ onClose }) =
   const handleValidatePDF = async () => {
     setProcessing(true);
     try {
-      await (window as any).electronApi.integration?.validatePDF('current.pdf', 'PDF/A-1b');
+      await window.electronApi?.integration?.validatePDF('current.pdf', 'PDF/A-1b');
     } catch (error) {
       console.error('Erro ao validar PDF:', error);
     } finally {
@@ -63,7 +63,7 @@ export const IntegrationPanel: React.FC<IntegrationPanelProps> = ({ onClose }) =
 
   const handleRestoreVersion = async (versionId: string) => {
     try {
-      await (window as any).electronApi.integration?.restoreVersion(versionId, 'restored.pdf');
+      await window.electronApi?.integration?.restoreVersion(versionId, 'restored.pdf');
       loadVersionHistory();
     } catch (error) {
       console.error('Erro ao restaurar versão:', error);

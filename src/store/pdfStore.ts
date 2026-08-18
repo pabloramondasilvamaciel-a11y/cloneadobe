@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { PDFViewState, PDFDocument } from '@types/pdf';
+import type { PDFViewState, PDFDocument } from '@/types/pdf';
 
 interface PDFStore {
   document: PDFDocument | null;

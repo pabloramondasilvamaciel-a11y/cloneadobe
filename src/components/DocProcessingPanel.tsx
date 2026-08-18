@@ -12,7 +12,7 @@ export const DocProcessingPanel: React.FC<DocProcessingPanelProps> = ({ onClose 
   const handleMergePDFs = async () => {
     setProcessing(true);
     try {
-      await (window as any).electronApi.docProcessing?.mergePDFs(['file1.pdf', 'file2.pdf'], 'output.pdf');
+      await window.electronApi?.docProcessing?.mergePDFs(['file1.pdf', 'file2.pdf'], 'output.pdf');
     } catch (error) {
       console.error('Erro ao mesclar PDFs:', error);
     } finally {
@@ -23,7 +23,7 @@ export const DocProcessingPanel: React.FC<DocProcessingPanelProps> = ({ onClose 
   const handleSplitPDF = async () => {
     setProcessing(true);
     try {
-      await (window as any).electronApi.docProcessing?.splitPDF('file.pdf', [
+      await window.electronApi?.docProcessing?.splitPDF('file.pdf', [
         { start: 1, end: 5 },
         { start: 6, end: 10 },
       ], './split-output');
