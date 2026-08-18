@@ -1,0 +1,21 @@
+.annotation-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+  z-index: 10;
+}
+
+.annotation {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.annotation:hover {
+  opacity: 0.5 !important;
+}
+
+.annotation.selected {
+  filter: drop-shadow(0 0 3px rgba(0, 102, 204, 0.8));
+  stroke-width: 2;
+}
